@@ -7,6 +7,7 @@ const logo = require('./logo.svg');
 
 interface AppState {
   people: Array<Person>;
+  showPeople: boolean;
 }
 
 class App extends React.Component<{}, AppState> {
@@ -18,17 +19,14 @@ class App extends React.Component<{}, AppState> {
         {name: 'Fred', age: 13},
         {name: 'Barney', age: 18},
         {name: 'Wilma', age: 22},
-      ]
+      ],
+      showPeople: false
     };
   }
 
-  swithcNameHandler = (newName: string) => {
-    // console.log('was clicked');
-    this.setState({people: [
-      {name: newName, age: 13},
-      {name: newName + '!', age: 18},
-      {name: `${newName}!!!`, age: 66},
-    ]});
+  toggleShowPersonHandler = () => {
+    let copyOfState = this.state.showPeople;
+    this.setState({showPeople: !copyOfState});
   }
 
   namedChangedHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -49,36 +47,40 @@ class App extends React.Component<{}, AppState> {
       cursor: 'pointer'
     };
 
+    let peopleElements: JSX.Element | undefined = undefined;
+
+    if (this.state.showPeople) {
+      peopleElements = (
+        <div>
+          <PersonComponent 
+            name={this.state.people[0].name} 
+            age={this.state.people[0].age} 
+          />
+
+          <PersonComponent 
+            name={this.state.people[1].name} 
+            age={this.state.people[1].age}
+            namedChanged={this.namedChangedHandler} 
+          />
+
+          <PersonComponent 
+            name={this.state.people[2].name} 
+            age={this.state.people[2].age}
+          >
+          Some inner text of the third component.
+          </PersonComponent>
+        </div> 
+      );
+    }
+
     return (
       <div className="App">
         <div className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
           <h2>Welcome to React</h2>
         </div>
-        <button 
-          style={btnStyle}
-          onClick={this.swithcNameHandler.bind(this, 'FromButton')}
-        >
-          Switch Name
-        </button>
-        <PersonComponent 
-          name={this.state.people[0].name} 
-          age={this.state.people[0].age} 
-        />
-
-        <PersonComponent 
-          name={this.state.people[1].name} 
-          age={this.state.people[1].age}
-          namedChanged={this.namedChangedHandler} 
-        />
-
-        <PersonComponent 
-          name={this.state.people[2].name} 
-          age={this.state.people[2].age}
-          click={this.swithcNameHandler.bind(this, 'FromParagraph')}
-        >
-        Some inner text of the third component.
-        </PersonComponent>   
+        <button style={btnStyle} onClick={this.toggleShowPersonHandler}>Toggle People</button>
+        {peopleElements}
       </div>
     );
   }
