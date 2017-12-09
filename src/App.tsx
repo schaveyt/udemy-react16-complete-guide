@@ -31,6 +31,15 @@ class App extends React.Component<{}, AppState> {
     ]});
   }
 
+  namedChangedHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+    // console.log('was clicked');
+    this.setState({people: [
+      {name: e.currentTarget.value, age: 13},
+      {name: `${e.currentTarget.value}!`, age: 18},
+      {name: `${e.currentTarget.value}!!!`, age: 66},
+    ]});
+  }
+
   render() {
     return (
       <div className="App">
@@ -46,7 +55,8 @@ class App extends React.Component<{}, AppState> {
 
         <PersonComponent 
           name={this.state.people[1].name} 
-          age={this.state.people[1].age} 
+          age={this.state.people[1].age}
+          namedChanged={this.namedChangedHandler} 
         />
 
         <PersonComponent 
