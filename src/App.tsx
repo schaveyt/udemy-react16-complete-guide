@@ -16,9 +16,9 @@ class App extends React.Component<{}, AppState> {
     super(props);
     this.state = {
       people: [
-        {name: 'Fred', age: 13},
-        {name: 'Barney', age: 18},
-        {name: 'Wilma', age: 22},
+        {id: 0, name: 'Fred', age: 13},
+        {id: 1, name: 'Barney', age: 18},
+        {id: 2, name: 'Wilma', age: 22},
       ],
       showPeople: false
     };
@@ -29,14 +29,14 @@ class App extends React.Component<{}, AppState> {
     this.setState({showPeople: !copyOfState});
   }
 
-  namedChangedHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-    // console.log('was clicked');
-    this.setState({people: [
-      {name: e.currentTarget.value, age: 13},
-      {name: `${e.currentTarget.value}!`, age: 18},
-      {name: `${e.currentTarget.value}!!!`, age: 66},
-    ]});
-  }
+  // namedChangedHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+  //   // console.log('was clicked');
+  //   this.setState({people: [
+  //     {name: e.currentTarget.value, age: 13},
+  //     {name: `${e.currentTarget.value}!`, age: 18},
+  //     {name: `${e.currentTarget.value}!!!`, age: 66},
+  //   ]});
+  // }
 
   render() {
     const btnStyle = {
@@ -52,23 +52,11 @@ class App extends React.Component<{}, AppState> {
     if (this.state.showPeople) {
       peopleElements = (
         <div>
-          <PersonComponent 
-            name={this.state.people[0].name} 
-            age={this.state.people[0].age} 
-          />
-
-          <PersonComponent 
-            name={this.state.people[1].name} 
-            age={this.state.people[1].age}
-            namedChanged={this.namedChangedHandler} 
-          />
-
-          <PersonComponent 
-            name={this.state.people[2].name} 
-            age={this.state.people[2].age}
-          >
-          Some inner text of the third component.
-          </PersonComponent>
+          {
+            this.state.people.map((p) => {
+              return <PersonComponent name={p.name} age={p.age} key={p.id} />;
+            })
+          }
         </div> 
       );
     }
