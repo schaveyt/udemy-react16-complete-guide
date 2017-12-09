@@ -41,13 +41,26 @@ class App extends React.Component<{}, AppState> {
   }
 
   render() {
+    const btnStyle = {
+      backgroundColor: 'white',
+      font: 'inherit',
+      border: '1px solid blue',
+      padding: '8px',
+      cursor: 'pointer'
+    };
+
     return (
       <div className="App">
         <div className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
           <h2>Welcome to React</h2>
         </div>
-        <button onClick={this.swithcNameHandler.bind(this, 'FromButton')}>Switch Name</button>
+        <button 
+          style={btnStyle}
+          onClick={this.swithcNameHandler.bind(this, 'FromButton')}
+        >
+          Switch Name
+        </button>
         <PersonComponent 
           name={this.state.people[0].name} 
           age={this.state.people[0].age} 
