@@ -1,9 +1,9 @@
 import * as React from 'react';
-import './Person.css';
-import { Person as PersonModel } from '../../Types/Person';
+import './style.css';
+import { Person } from '../../../Types/Person';
 
 interface PersonProps {
-    person: PersonModel;
+    person: Person;
     deleteClicked?: (id: number) => void;
     namedChanged?: (name: string, id: number) => void;
 }
@@ -20,7 +20,7 @@ function onNameChanged(e: React.ChangeEvent<HTMLInputElement>, props: PersonProp
     }
 }
 
-export const Person: React.SFC<PersonProps> = (props) => {
+export const PersonCard: React.SFC<PersonProps> = (props) => {
     return (
         <div className="Person">
           <p>I'm a {props.person.name} and {props.person.age}</p>

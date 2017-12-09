@@ -1,6 +1,6 @@
 import * as React from 'react';
 import './App.css';
-import { Person as PersonComponent } from './Components/Person/Person';
+import { PersonCard } from './Components/Presentation/PersonCard';
 import { Person } from './Types/Person';
 
 const logo = require('./logo.svg');
@@ -64,7 +64,7 @@ class App extends React.Component<{}, AppState> {
           {
             this.state.people.map((p) => {
               return (
-                <PersonComponent 
+                <PersonCard 
                   person={p} 
                   key={p.id} 
                   deleteClicked={this.onDeletePersonHandler} 
