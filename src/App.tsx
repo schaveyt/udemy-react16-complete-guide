@@ -29,14 +29,23 @@ class App extends React.Component<{}, AppState> {
     this.setState({showPeople: !copyOfState});
   }
 
-  // namedChangedHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-  //   // console.log('was clicked');
-  //   this.setState({people: [
-  //     {name: e.currentTarget.value, age: 13},
-  //     {name: `${e.currentTarget.value}!`, age: 18},
-  //     {name: `${e.currentTarget.value}!!!`, age: 66},
-  //   ]});
-  // }
+  onDeletePersonHandler = (personId: number) => {
+    const modifiedState = this.state.people.filter((person) => {
+      return person.id !== personId;
+    });
+    this.setState({people: modifiedState});
+  }
+
+  namedChangedHandler = (newName: string, personId: number) => {
+    const copyOfState = this.state.people.splice(0);
+    copyOfState.map((person) => {
+      if (person.id === personId) {
+        person.name = newName;
+      }
+    });
+    this.setState({people: copyOfState});
+    
+  }
 
   render() {
     const btnStyle = {
@@ -54,7 +63,13 @@ class App extends React.Component<{}, AppState> {
         <div>
           {
             this.state.people.map((p) => {
-              return <PersonComponent name={p.name} age={p.age} key={p.id} />;
+              return (
+                <PersonComponent 
+                  person={p} 
+                  key={p.id} 
+                  deleteClicked={this.onDeletePersonHandler} 
+                  namedChanged={this.namedChangedHandler} 
+                />);
             })
           }
         </div> 
