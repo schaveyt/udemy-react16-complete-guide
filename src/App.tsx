@@ -23,7 +23,6 @@ class App extends React.Component<{}, AppState> {
   }
 
   swithcNameHandler = () => {
-    // tslint:disable-next-line:no-console
     // console.log('was clicked');
     this.setState({people: [
       {name: 'Fredrick', age: 13},
@@ -40,9 +39,23 @@ class App extends React.Component<{}, AppState> {
           <h2>Welcome to React</h2>
         </div>
         <button onClick={this.swithcNameHandler}>Switch Name</button>
-        <PersonComponent name={this.state.people[0].name} age={this.state.people[0].age} />  
-        <PersonComponent name={this.state.people[1].name} age={this.state.people[1].age} />
-        <PersonComponent name={this.state.people[2].name} age={this.state.people[2].age} />    
+        <PersonComponent 
+          name={this.state.people[0].name} 
+          age={this.state.people[0].age} 
+        />
+
+        <PersonComponent 
+          name={this.state.people[1].name} 
+          age={this.state.people[1].age} 
+        />
+
+        <PersonComponent 
+          name={this.state.people[2].name} 
+          age={this.state.people[2].age}
+          click={this.swithcNameHandler}
+        >
+        Some inner text of the third component.
+        </PersonComponent>   
       </div>
     );
   }
