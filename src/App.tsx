@@ -49,7 +49,8 @@ class App extends React.Component<{}, AppState> {
 
   render() {
     const btnStyle = {
-      backgroundColor: 'white',
+      backgroundColor: 'green',
+      color: 'white',
       font: 'inherit',
       border: '1px solid blue',
       padding: '8px',
@@ -74,6 +75,18 @@ class App extends React.Component<{}, AppState> {
           }
         </div> 
       );
+
+      btnStyle.backgroundColor = 'red';
+    }
+
+    const styleClasses = new Array<string>();
+
+    if (this.state.people.length <= 2) {
+      styleClasses.push('red');
+    }
+
+    if (this.state.people.length <= 1) {
+      styleClasses.push('bold');
     }
 
     return (
@@ -81,6 +94,7 @@ class App extends React.Component<{}, AppState> {
         <div className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
           <h2>Welcome to React</h2>
+          <p className={styleClasses.join(' ')}>This is really working.</p>
         </div>
         <button style={btnStyle} onClick={this.toggleShowPersonHandler}>Toggle People</button>
         {peopleElements}
