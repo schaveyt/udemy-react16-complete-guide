@@ -4,10 +4,10 @@ export interface PlaceholderParentProps {
     children: React.ReactNode;
 }
 
-export function PlaceholderParent (props: PlaceholderParentProps) {
+export const PlaceholderParent: React.SFC<PlaceholderParentProps> = (props) => {
     return (
       <div>
         {props.children}
       </div>
     );
-}
+};

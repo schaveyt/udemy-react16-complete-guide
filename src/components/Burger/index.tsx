@@ -19,6 +19,10 @@ export const Burger: React.SFC<BurgerProps> = (props) => {
     }
   });
 
+  if (transformedIngredients.length === 0) {
+    transformedIngredients.push(<p>Please select your ingredients.</p>);
+  }
+
   return (
     <div className="Burger">
       <BurgerIngredient type="bread-top" />

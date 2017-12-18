@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { PlaceholderParent as Aux } from '../../hoc/PlaceholderParent';
 import { Burger } from '../../components/Burger';
+import { BuildControl } from '../../components/BuildControl';
 
 export interface BurgerBuilderProps {
 }
@@ -16,25 +17,45 @@ export interface BurgerBuilderState {
   ingredients: BurgerIngredientsType;
 }
 
-export class BurgerBuilder extends React.PureComponent<BurgerBuilderProps, BurgerBuilderState> {
+export class BurgerBuilder extends React.Component<BurgerBuilderProps, BurgerBuilderState> {
 
   constructor(props: BurgerBuilderProps) {
     super(props);
     this.state = {
       ingredients: {
-        salad: 1,
-        bacon: 1,
-        cheese: 1,
-        meat: 1
+        salad: 0,
+        bacon: 0,
+        cheese: 0,
+        meat: 0
       }
     };
+  }
+
+  addIngredient = (ingredientType: string) => {
+    // console.log('add more ' + ingredientType);
+    const shallowCopy = {...this.state};
+    const oldCount = shallowCopy.ingredients[ingredientType];
+    shallowCopy.ingredients[ingredientType] = oldCount + 1;
+    this.setState({ingredients: shallowCopy.ingredients});
+  }
+
+  removeIngredient = (ingredientType: string) => {
+    // console.log('remove more ' + ingredientType);
+    const shallowCopy = {...this.state};
+    const oldCount = shallowCopy.ingredients[ingredientType];
+    shallowCopy.ingredients[ingredientType] = oldCount - 1;
+    this.setState(prevState => ({ingredients: shallowCopy.ingredients}));
   }
 
   render() {
     return (
       <Aux>
         <Burger ingredients={this.state.ingredients} />
-        <div>Build Controls</div>
+        <BuildControl 
+          ingredients={this.state.ingredients}
+          onAddIngredient={this.addIngredient}
+          onRemoveIngredient={this.removeIngredient}
+        />
       </Aux>
     );
   }
