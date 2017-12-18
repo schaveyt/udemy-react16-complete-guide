@@ -1,5 +1,7 @@
+# Udemy: React16 - The Complete Guide
+
 This project completed the Udemy couse [React 16 - The Complete Guide](https://www.udemy.com/react-the-complete-guide-incl-redux/learn/v4/overview)
-and was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app) 
+and was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app)
 with a bit of help from [Microsoft's Typescript React Starter Kit](https://github.com/Microsoft/TypeScript-React-Starter)
 
 ~~~ .bash
