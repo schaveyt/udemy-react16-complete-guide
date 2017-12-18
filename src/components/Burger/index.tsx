@@ -1,15 +1,28 @@
 import * as React from 'react';
-import { BurgerIngredient } from '../BurgerIngredient';
 import './index.css';
+import { BurgerIngredient } from '../BurgerIngredient';
+import { BurgerIngredientsType } from '../../containers/BurderBuilder';
 
 interface BurgerProps {
+  ingredients: BurgerIngredientsType;
 }
 
 export const Burger: React.SFC<BurgerProps> = (props) => {
+
+  const transformedIngredients = new Array<React.ReactNode>();
+  let key = 0;
+  
+  Object.keys(props.ingredients).forEach((t) => {
+    const ingredientCount = props.ingredients[t];
+    for (let i = 0; i < ingredientCount; i++) {
+      transformedIngredients.push(<BurgerIngredient key={key++} type={t} />);
+    }
+  });
+
   return (
     <div className="Burger">
       <BurgerIngredient type="bread-top" />
-      <BurgerIngredient type="meat" />
+      {transformedIngredients}
       <BurgerIngredient type="bread-bottom" />
     </div>
   );
